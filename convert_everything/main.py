@@ -16,7 +16,7 @@ from pathlib import Path
 from tkinter import filedialog, messagebox, ttk
 
 import installer
-from converters import MissingTool, convert, targets_for
+from converters import ConversionError, MissingTool, convert, targets_for
 
 APP = "Convert Everything"
 TRASH = "Recycle Bin" if sys.platform == "win32" else "Trash"
@@ -69,16 +69,19 @@ def gather(path, target):
 
 
 def _show(win):
+    """Center a window (created hidden by _window) on the screen, then show it."""
     win.update_idletasks()
     x = (win.winfo_screenwidth() - win.winfo_reqwidth()) // 2
-    y = (win.winfo_screenheight() - win.winfo_reqheight()) // 3
+    y = (win.winfo_screenheight() - win.winfo_reqheight()) // 2
     win.geometry(f"+{x}+{y}")
+    win.deiconify()
     win.lift()
     win.focus_force()
 
 
 def _window(root):
     win = tk.Toplevel(root)
+    win.withdraw()  # once a window is on screen, Windows ignores our position; place it first
     win.title(APP)
     win.resizable(False, False)
     win.attributes("-topmost", True)
@@ -139,7 +142,7 @@ def run_with_progress(root, text, work):
 
 
 def _describe(err):
-    return str(err) if isinstance(err, MissingTool) else f"{type(err).__name__}: {err}"
+    return str(err) if isinstance(err, ConversionError) else f"{type(err).__name__}: {err}"
 
 
 def _plan(files, target, folder):

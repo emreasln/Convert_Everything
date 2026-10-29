@@ -43,7 +43,11 @@ INSTALL_HINTS = {
 }
 
 
-class MissingTool(Exception):
+class ConversionError(Exception):
+    """A problem explained in plain words, shown to the user as is."""
+
+
+class MissingTool(ConversionError):
     pass
 
 
@@ -69,6 +73,8 @@ def convert(src, dst):
     """Convert src into dst. Returns the created files (a multi-page PDF
     converted to images gives one file per page: name-1.png, name-2.png, ...)."""
     src, dst = Path(src), Path(dst)
+    if src.stat().st_size == 0:
+        raise ConversionError("The file is empty, so there is nothing to convert.")
     engine = ENGINES[_row(src.suffix)[2]]
     # Work in a temp folder so a failed conversion never leaves half a file behind.
     with tempfile.TemporaryDirectory() as tmp:
@@ -101,9 +107,14 @@ def _find(tool, names, extra_paths=()):
 
 
 def _image(src, out):
-    from PIL import Image
+    from PIL import Image, UnidentifiedImageError
 
-    with Image.open(src) as im:
+    try:
+        im = Image.open(src)
+    except UnidentifiedImageError:
+        raise ConversionError(f"This doesn't look like a valid {src.suffix[1:].upper()} image. "
+                              "It may be damaged, or its extension may be wrong.") from None
+    with im:
         if out.suffix in (".jpg", ".bmp", ".pdf") and im.mode != "RGB":
             rgba = im.convert("RGBA")  # flatten transparency onto white
             im = Image.new("RGB", im.size, "white")

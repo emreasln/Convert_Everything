@@ -13,7 +13,7 @@ from pathlib import Path
 from converters import source_extensions, targets_for
 
 NAME = "Convert Everything"
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 EXE = "ConvertEverything"
 MARKER = "Created by Convert Everything"  # lets uninstall recognise its own files
 FROZEN = getattr(sys, "frozen", False)  # True in the packaged app, False when run from source
