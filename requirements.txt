@@ -1,0 +1,5 @@
+Pillow
+PyMuPDF<2  # 2.x pulls in a large AI layout model we do not use
+pdf2docx
+Send2Trash
+imageio-ffmpeg
