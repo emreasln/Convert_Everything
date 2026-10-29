@@ -12,7 +12,7 @@
 <p align="center">
   <a href="https://github.com/emreasln/Convert_Everything/releases/latest"><img src="https://img.shields.io/github/v/release/emreasln/Convert_Everything?label=download" alt="Latest release"></a>
   <img src="https://img.shields.io/badge/Windows%20%7C%20macOS%20%7C%20Linux-informational" alt="Windows, macOS, Linux">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="MIT license"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-AGPL--3.0-green" alt="AGPL-3.0 license"></a>
 </p>
 
 <p align="center">
@@ -41,8 +41,6 @@ files **locally, on your own computer**. Your files never leave your machine.
 ## Install
 
 Open the file you downloaded and click **Install**. That's it.
-
-<p align="center"><img src="docs/images/install.png" width="413" alt="Install window"></p>
 
 <details>
 <summary><b>Windows:</b> "Windows protected your PC"?</summary>
@@ -80,21 +78,13 @@ After installing you can delete the download; the app has copied itself into you
    - **macOS:** it's under **Quick Actions → Convert…**
    - **Linux:** GNOME Files: **Scripts → Convert** · Dolphin and Nemo: **Convert…**
 2. Pick the format you want. On Windows the formats are right in the menu; on macOS and Linux a
-   small window asks:
-
-   <img src="docs/images/pick-format.png" width="362" alt="Choose a format">
-
+   small window asks.
 3. Choose what happens to the original:
-
-   <img src="docs/images/replace-or-copy-batch.png" width="413" alt="Replace original or save copies">
-
    - **Replace original:** the new file takes the original's place and the original goes to the
      Recycle Bin / Trash.
    - **Save a copy…:** the original stays untouched and you choose where the new file goes.
 
-4. Wait a moment. Big videos take a little longer:
-
-   <img src="docs/images/progress.png" width="385" alt="Converting files">
+4. Wait a moment. Big videos take a little longer.
 
 ## Uninstall
 
@@ -193,4 +183,9 @@ Issues and pull requests are welcome.
 
 ## License
 
-[MIT](LICENSE)
+Copyright (C) 2026 Convert Everything contributors
+
+Convert Everything is free software, licensed under the [GNU AGPL v3.0 or later](LICENSE). You can
+use it for anything, share it and change it; if you distribute a modified version, its source code
+must stay open too. The ready-made apps bundle other open-source components, listed in
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
